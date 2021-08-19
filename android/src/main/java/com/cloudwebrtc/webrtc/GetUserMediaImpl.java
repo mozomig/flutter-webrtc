@@ -417,26 +417,28 @@ class GetUserMediaImpl {
             return;
         }
 
-        requestPermissions(
-                requestPermissions,
-                /* successCallback */ new Callback() {
-                    @Override
-                    public void invoke(Object... args) {
-                        List<String> grantedPermissions = (List<String>) args[0];
-
-                        getUserMedia(constraints, result, mediaStream, grantedPermissions);
-                    }
-                },
-                /* errorCallback */ new Callback() {
-                    @Override
-                    public void invoke(Object... args) {
-                        // According to step 10 Permission Failure of the
-                        // getUserMedia() algorithm, if the user has denied
-                        // permission, fail "with a new DOMException object whose
-                        // name attribute has the value NotAllowedError."
-                        resultError("getUserMedia", "DOMException, NotAllowedError", result);
-                    }
-                });
+        getUserMedia(constraints, result, mediaStream, requestPermissions);
+//
+//        requestPermissions(
+//                requestPermissions,
+//                /* successCallback */ new Callback() {
+//                    @Override
+//                    public void invoke(Object... args) {
+//                        List<String> grantedPermissions = (List<String>) args[0];
+//
+//                        getUserMedia(constraints, result, mediaStream, grantedPermissions);
+//                    }
+//                },
+//                /* errorCallback */ new Callback() {
+//                    @Override
+//                    public void invoke(Object... args) {
+//                        // According to step 10 Permission Failure of the
+//                        // getUserMedia() algorithm, if the user has denied
+//                        // permission, fail "with a new DOMException object whose
+//                        // name attribute has the value NotAllowedError."
+//                        resultError("getUserMedia", "DOMException, NotAllowedError", result);
+//                    }
+//                });
     }
 
     void getDisplayMedia(
